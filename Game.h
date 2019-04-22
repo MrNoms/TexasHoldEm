@@ -15,23 +15,30 @@ public:
 	int PayOut(Player *);	// mutator for Pot
 	int splitPot(Player *, Player *); // input two players who split the pot
 
-	void calcHand(Player *); // input player circular list, traverse list & assign hand value to each player
+	void checkPlayerChoice(Player *); // not sure on return type...
+		// if fold, take cards from player.hand[] and put into deck.discard[]
+		// if check, do nothing. allow Play() to advance to next player
+		// if raise, increase totalBet
+
+	//void calcHand(Player *); // input player circular list, traverse list & assign hand value to each player
+		// unneccisary? see Player.getHandRank()
 
 private:
 	enum RoundPhase { PRE_FLOP, FLOP, TURN, RIVER, SHOW };
-	enum handRank { HIGH_CARD, PAIR, TWO_PAIR, THREE_OF_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_KIND, STRAIGHT_FLUSH, ROYAL_FLUSH };
+		// Play() uses RoundPhase for readability 
+	enum HandRank { HIGH_CARD, PAIR, TWO_PAIR, THREE_OF_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_KIND, STRAIGHT_FLUSH, ROYAL_FLUSH };
 	int const Rounds = 10;
 
-	Card CommCards[5]; // Array for the "River"
+	Card CommCards[5]; // Array for the "River" // Community Cards
 		// need functions to add cards from deck to this & to empty array
 
 	CircleList<Player> Table;	//the Player class is coming
 	Player * Add2Table();		//return type and arguments up for debate
 	void Kick(Player *);
 	Player * DealerButton;		//Pointer type may have to be tweaked
-	Player * BigBlind;			//May not
-	Player * SmallBlind;		//keep these
 
 	int Pot;
-	int Ante;	// Do we need this if we're using blinds?
+	int Ante;
+	int totalBet; // Player.bet must equal totalBet, fold, or raise
+		// if Player raises, totalBet = raise - Player.bet
 };
