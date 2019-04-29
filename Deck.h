@@ -1,5 +1,5 @@
 #pragma once
-#include "ArrStack.h"
+#include "ArrStack.cpp"
 #include "Card.h"
 
 class Deck {
