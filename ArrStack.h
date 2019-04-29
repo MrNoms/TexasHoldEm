@@ -6,13 +6,11 @@ private:
 	T * items;
 	int capacity;
 	int top;
-	class EmptyStack {};
-	class FullStack {};
 public:
 	ArrStack(int);
 	~ArrStack();
-	bool empty();
-	bool full();
+	bool isEmpty();
+	bool isFull();
 	T pop();
 	void add(T);
 };
