@@ -9,8 +9,13 @@
 		QUEEN, KING, ACE};
 
 struct Card {
-	Suit thisSuit = NONE;
-	Number thisNum = ZERO;
+	Suit thisSuit;
+	Number thisNum;
+
+	Card() {
+		thisSuit = NONE;
+		thisNum = ZERO;
+	}
 
 	Card(Suit s, Number n) {
 		thisSuit = s;
