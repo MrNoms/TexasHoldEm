@@ -12,6 +12,11 @@ struct Card {
 	Suit thisSuit = NONE;
 	Number thisNum = ZERO;
 
+	Card(Suit s, Number n) {
+		thisSuit = s;
+		thisNum = n;
+	}
+
 	std::string showSuit() {
 		switch (thisSuit) {
 		case DIAMOND: return "Diamond";
