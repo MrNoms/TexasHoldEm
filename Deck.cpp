@@ -13,8 +13,6 @@ Deck::Deck() {
 	}
 }
 
-Deck::~Deck() {}
-
 Card Deck::Deal() {
 	return Pile.pop();
 }
