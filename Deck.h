@@ -9,7 +9,6 @@ private:
 public:
 	const int MAX = 52;
 	Deck();
-	~Deck();
 	Card Deal();
 	void Reset(Deck &);
 	void Shuffle(Deck &);
