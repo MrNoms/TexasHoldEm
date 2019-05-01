@@ -24,4 +24,3 @@ public:
 	int getHandRank(Card *); // takes commCards[] from game.h, and player.hand[], and calculates player.handRank
 	int getPlayerChoice(); // returns enum check, raise, fold
 };
-

@@ -4,12 +4,12 @@
 
 class Deck {
 private:
-	ArrStack<Card> Pile;
-	ArrStack<Card> Discard;
+	ArrStack<Card> Pile =
+		ArrStack<Card> (MAX);
 public:
+	const int MAX = 52;
 	Deck();
-	~Deck();
 	Card Deal();
-	void Reset();
-	void Shuffle();
+	void Reset(Deck &);
+	void Shuffle(Deck &);
 };
