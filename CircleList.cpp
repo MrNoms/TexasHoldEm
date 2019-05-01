@@ -54,6 +54,7 @@ void CircleList<T>::deleteNode(T trashData) {
 		else {
 			Link<T> * trash = i->next;
 			i->next = i->next->next;
+			if (trash == end) end = i;
 			delete trash;
 			totNodes--;
 		}
