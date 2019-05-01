@@ -3,13 +3,16 @@
 #include "Card.h"
 
 class Deck {
-private:
-	ArrStack<Card> Pile =
-		ArrStack<Card> (MAX);
 public:
-	const int MAX = 52;
-	Deck();
+	void getDeck();
 	Card Deal();
 	void Reset(Deck &);
-	void Shuffle(Deck &);
+	void take(Card);
+	void ShuffleFrom(Deck &);
+	bool cardsLeft();
+
+	const int MAX = 52;
+private:
+	ArrStack<Card> Pile =
+		ArrStack<Card>(MAX);
 };
