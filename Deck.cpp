@@ -1,6 +1,6 @@
 #include "Deck.h"
 
-Deck::Deck() {
+void Deck::getDeck() {
 	Suit s = DIAMOND;
 	while (s <= SPADE) {
 		Number n = TWO;
@@ -19,24 +19,33 @@ Card Deck::Deal() {
 
 void Deck::Reset(Deck & other) {
 	while (!Pile.isEmpty())
-		other.Pile.add(Deal());
+		other.Pile.add(this->Deal());
 }
 
-void Deck::Shuffle(Deck & other) {
+void Deck::take(Card c) {
+	Pile.add(c);
+}
+
+void Deck::ShuffleFrom(Deck & other) {
 	Deck waiting;
-	//check the top card of other deck
+	//take the top card of other deck
 	Card check = other.Deal();
 	//its number will be how many we skip
-	int skip = check.thisNum;
+	int skip = check.thisNum + 1;
 	//put that card in this deck
-	this->Pile.add(check);
+	this->take(check);
 	while (!other.Pile.isEmpty()) {
 		//move # of cards to waiting deck
 		for (int i = 0; i < skip && !other.Pile.isEmpty(); i++) {
-			waiting.Pile.add(other.Deal());
+			waiting.take(other.Deal());
 		}
 		//put current top of other deck into this
-		this->Pile.add(other.Deal());
+		if (!other.Pile.isEmpty())
+			this->take(other.Deal());
 	}
-	if (!this->Pile.isFull()) this->Shuffle(waiting);
+	if (!this->Pile.isFull()) this->ShuffleFrom(waiting);
+}
+
+bool Deck::cardsLeft() {
+	return !Pile.isEmpty();
 }
