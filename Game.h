@@ -2,11 +2,15 @@
 #include "Card.h"
 #include "CircleList.h"	//can be ported to look like they are part
 #include "Stack.h"		//of this game, rather than generic code
-#include "Deck.h"
 #include "Player.h"
+#include <iostream>
+using namespace std;
+
+class Deck {};	//would use stack
 
 class Game {
 public:
+	void Play();
 	Deck PlayCards; // Deck of game cards? 
 		// functions to initialize deck, shuffle, pass out
 	int PayIn(Player *);	// input circular list of players. return to Pot
@@ -21,9 +25,12 @@ public:
 	//void calcHand(Player *); // input player circular list, traverse list & assign hand value to each player
 		// unneccisary? see Player.getHandRank()
 
+	Game();
+	~Game();
+
 private:
 	enum RoundPhase { PRE_FLOP, FLOP, TURN, RIVER, SHOW };
-	// Play() uses RoundPhase for readability 
+		// Play() uses RoundPhase for readability 
 	enum HandRank { HIGH_CARD, PAIR, TWO_PAIR, THREE_OF_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_KIND, STRAIGHT_FLUSH, ROYAL_FLUSH };
 	int const Rounds = 10;
 
@@ -31,10 +38,11 @@ private:
 		// need functions to add cards from deck to this & to empty array
 
 	CircleList<Player> Table;	//the Player class is coming
-	Player * Add2Table();		//return type and arguments up for debate
+	void Add2Table(int);	//return type and arguments up for debate --- adds Player to Table
 	void Kick(Player *);
 	Player * DealerButton;		//Pointer type may have to be tweaked
 
+	int numPlayers;
 	int Pot;
 	int Ante;
 	int totalBet; // Player.bet must equal totalBet, fold, or raise
