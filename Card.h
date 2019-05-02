@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+using namespace std;
 
 	enum Suit
 	{NONE, DIAMOND, CLUB, HEART, SPADE};
@@ -22,7 +23,7 @@ struct Card {
 		thisNum = n;
 	}
 
-	std::string showSuit() {
+	string showSuit() {
 		switch (thisSuit) {
 		case DIAMOND: return "Diamond";
 			break;
@@ -35,18 +36,23 @@ struct Card {
 		}
 	}
 
-	char showNum() {
+	string showNum() {
 		char num = '0';
-		if (thisNum && thisNum < JACK)
-			return thisNum + num;
+		string strSuit = " ";
+		if (thisNum && thisNum < TEN) {
+			num += thisNum + 1;
+			return strSuit + num;
+		}
 		switch (thisNum) {
-		case JACK: return 'J';
+		case TEN: return "10";
 			break;
-		case QUEEN: return 'Q';
+		case JACK: return " J";
 			break;
-		case KING: return 'K';
+		case QUEEN: return " Q";
 			break;
-		case ACE: return 'A';
+		case KING: return " K";
+			break;
+		case ACE: return " A";
 			break;
 		}
 	}
