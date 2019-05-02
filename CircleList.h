@@ -5,14 +5,15 @@ template <class T>
 class CircleList {
 private:
 	Link<T> * end;
-	Link<T> * currPos;
 	int totNodes;
+	Link<T> * currPos;
+	
 public:
 	CircleList();
 	~CircleList();
-	void reset();
 	Link<T> * getNextNode();
 	void putNode(T);
 	void deleteNode(T);
 	void printNodes();
+	int getListSize(); // returns totNodes
 };

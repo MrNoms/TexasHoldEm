@@ -10,6 +10,7 @@ Player::Player()
 	int wallet = 1000; // total $ in wallet
 	int bet = 0; // amount player is betting in a given round, taken from wallet
 	int playerNumber = 0;
+	bool fold = false;
 }
 
 
@@ -20,4 +21,14 @@ Player::~Player()
 void Player::setPlayerNumber(int playerNum)
 {
 	playerNumber = playerNum;
+}
+
+void Player::setFold(bool fold)
+{
+	this->fold = fold;
+}
+
+bool Player::getFold()
+{
+	return fold;
 }

@@ -10,13 +10,21 @@ class Deck {};	//would use stack
 
 class Game {
 public:
+
+	// setters
+	void setPot(int);
+	void setAnte();
+
+	// getters
+	int getPot();
+
+	// util
 	void Play();
 	Deck PlayCards; // Deck of game cards? 
 		// functions to initialize deck, shuffle, pass out
-	int PayIn(Player *);	// input circular list of players. return to Pot
+	int PayIn(Player *, int);	// input circular list of players & payIn amount. return to Pot
 	int PayOut(Player *);	// mutator for Pot
 	int splitPot(Player *, Player *); // input two players who split the pot
-
 	void checkPlayerChoice(Player *); // not sure on return type...
 		// if fold, take cards from player.hand[] and put into deck.discard[]
 		// if check, do nothing. allow Play() to advance to next player
@@ -25,6 +33,7 @@ public:
 	//void calcHand(Player *); // input player circular list, traverse list & assign hand value to each player
 		// unneccisary? see Player.getHandRank()
 
+	// constructor & destructor
 	Game();
 	~Game();
 
@@ -42,6 +51,7 @@ private:
 	void Kick(Player *);
 	Player * DealerButton;		//Pointer type may have to be tweaked
 
+	RoundPhase phase;
 	int numPlayers;
 	int Pot;
 	int Ante;

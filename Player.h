@@ -12,6 +12,7 @@ private:
 	int wallet; // total $ in wallet
 	int bet; // amount player is betting in a given round, taken from wallet
 	int playerNumber; // Player1, Player2, etc
+	bool fold;
 
 public:
 	Player();
@@ -19,8 +20,11 @@ public:
 
 	// setters
 	void setPlayerNumber(int);
+	void setFold(bool);
 
 	// getters
 	int getHandRank(Card *); // takes commCards[] from game.h, and player.hand[], and calculates player.handRank
 	int getPlayerChoice(); // returns enum check, raise, fold
+	bool getFold();
 };
+
