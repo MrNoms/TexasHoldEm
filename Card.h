@@ -33,6 +33,7 @@ struct Card {
 			break;
 		case SPADE: return "Spade";
 			break;
+		default: return "None";
 		}
 	}
 
@@ -54,6 +55,7 @@ struct Card {
 			break;
 		case ACE: return " A";
 			break;
+		default: return "00";
 		}
 	}
 };
