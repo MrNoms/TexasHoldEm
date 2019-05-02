@@ -3,6 +3,8 @@
 
 enum PlayerChoice { CHECK, RAISE, FOLD }; 
 
+class InsufficientFunds {};
+
 class Player
 {
 private:
@@ -21,10 +23,13 @@ public:
 	// setters
 	void setPlayerNumber(int);
 	void setFold(bool);
+	void addWallet(int);
+	void subWallet(int);
 
 	// getters
 	int getHandRank(Card *); // takes commCards[] from game.h, and player.hand[], and calculates player.handRank
 	int getPlayerChoice(); // returns enum check, raise, fold
 	bool getFold();
+	int getWallet();
 };
 

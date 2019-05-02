@@ -22,7 +22,7 @@ public:
 	void Play();
 	Deck PlayCards; // Deck of game cards? 
 		// functions to initialize deck, shuffle, pass out
-	int PayIn(Player *, int);	// input circular list of players & payIn amount. return to Pot
+	int PayIn(Player, int);	// input circular list of players & payIn amount. return to Pot
 	int PayOut(Player *);	// mutator for Pot
 	int splitPot(Player *, Player *); // input two players who split the pot
 	void checkPlayerChoice(Player *); // not sure on return type...
@@ -48,9 +48,8 @@ private:
 
 	CircleList<Player> Table;	//the Player class is coming
 	void Add2Table(int);	//return type and arguments up for debate --- adds Player to Table
-	void Kick(Player *);
+	void  Kick(Player);
 	Player * DealerButton;		//Pointer type may have to be tweaked
-
 	RoundPhase phase;
 	int numPlayers;
 	int Pot;

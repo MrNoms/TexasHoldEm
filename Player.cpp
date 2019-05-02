@@ -32,3 +32,8 @@ bool Player::getFold()
 {
 	return fold;
 }
+
+int Player::getWallet()
+{
+	return wallet;
+}

@@ -1,8 +1,18 @@
 #include "Game.h"
 
+void Game::setPot(int fundsIn)
+{
+	Pot += fundsIn;
+}
+
 void Game::setAnte()
 {
 	Ante = Ante + 5;
+}
+
+int Game::getPot()
+{
+	return Pot;
 }
 
 void Game::Play()
@@ -29,12 +39,21 @@ void Game::Play()
 
 			case (PRE_FLOP):
 				// collect ante
-				for (int i = 0; i < Table.getListSize(); i++) {
-				//	setPot(PayIn(Table.getNextNode, Ante));
-				//	How do I access the current Player in Table?
-				//  shouldn't it be Table.getNextNode(), not Table.getNextNode?
+				for (int i = 0; i < Table.getListSize(); i++) {	
+
+					// Logic Error?
+					// if player kicked, does it skip the next players opportunity to ante?
+					try {
+						setPot(PayIn(Table.getNextNode()->data, Ante));
+					}
+					catch (InsufficientFunds) {
+						Kick(Table.getCurrPos()->data);
+					}
 				}
+				Table.resetList();
+
 				// deal hands
+
 				// bet round
 				break;
 			case (FLOP):
@@ -65,6 +84,18 @@ void Game::Play()
 
 } // Play()
 
+int Game::PayIn(Player currPlayer, int betIn)
+// PayIn takes player and amount the player must contribute to the pot
+// returns amount to be placed into pot
+{
+	if (betIn > currPlayer.getWallet())
+		throw InsufficientFunds();
+	else {
+		currPlayer.subWallet(betIn);
+		return betIn;
+	}
+}
+
 Game::Game()
 {
 	phase = PRE_FLOP;
@@ -87,6 +118,11 @@ void Game::Add2Table(int playerNum)
 	newPlayer->setPlayerNumber(playerNum);
 
 	Table.putNode(*newPlayer);			// is *newPlayer a correct parameter logically for this function?
+}
+
+void Game::Kick(Player)
+{
+	// Table.listSize()--;
 }
 
 
