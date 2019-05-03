@@ -57,6 +57,12 @@ void CircleList<T>::resetList()
 	currPos = NULL;
 }
 
+template<class T>
+Link<T>* CircleList<T>::getEnd()
+{
+	return end;
+}
+
 template <class T>
 void CircleList<T>::deleteNode(T trashData) {
 	Link<T> * i = end;

@@ -1,12 +1,9 @@
 #pragma once
-#include "Card.h"
 #include "CircleList.h"	//can be ported to look like they are part
-#include "Stack.h"		//of this game, rather than generic code
+#include "Deck.h"
 #include "Player.h"
 #include <iostream>
 using namespace std;
-
-class Deck {};	//would use stack
 
 class Game {
 public:
@@ -20,8 +17,6 @@ public:
 
 	// util
 	void Play();
-	Deck PlayCards; // Deck of game cards? 
-		// functions to initialize deck, shuffle, pass out
 	int PayIn(Player, int);	// input circular list of players & payIn amount. return to Pot
 	int PayOut(Player *);	// mutator for Pot
 	int splitPot(Player *, Player *); // input two players who split the pot
@@ -43,12 +38,18 @@ private:
 	enum HandRank { HIGH_CARD, PAIR, TWO_PAIR, THREE_OF_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_KIND, STRAIGHT_FLUSH, ROYAL_FLUSH };
 	int const Rounds = 10;
 
+	Deck PlayCards; // Deck of game cards?
+		// functions to initialize deck, shuffle, pass out
+
+
 	Card CommCards[5]; // Array for the "River" // Community Cards
 		// need functions to add cards from deck to this & to empty array
 
-	CircleList<Player> Table;	//the Player class is coming
+	CircleList<Player> * Table;
 	void Add2Table(int);	//return type and arguments up for debate --- adds Player to Table
 	void  Kick(Player);
+	void getBets();
+	bool betsComplete;
 	Player * DealerButton;		//Pointer type may have to be tweaked
 	RoundPhase phase;
 	int numPlayers;

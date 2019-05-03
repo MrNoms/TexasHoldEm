@@ -28,6 +28,17 @@ void Player::setFold(bool fold)
 	this->fold = fold;
 }
 
+void Player::subWallet(int withdraw)
+{
+	wallet -= withdraw;
+}
+
+void Player::setHand(Card card1, Card card2)
+{
+	if (!hand[0].thisNum) hand[0] = card1;
+	else if (!hand[1].thisNum) hand[1] = card2;
+}
+
 bool Player::getFold()
 {
 	return fold;

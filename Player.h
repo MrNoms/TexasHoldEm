@@ -25,6 +25,7 @@ public:
 	void setFold(bool);
 	void addWallet(int);
 	void subWallet(int);
+	void setHand(Card, Card);
 
 	// getters
 	int getHandRank(Card *); // takes commCards[] from game.h, and player.hand[], and calculates player.handRank

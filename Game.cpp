@@ -35,47 +35,57 @@ void Game::Play()
 
 		while (phase != SHOW) {
 
-			switch (phase) {
+			switch(phase) {
 
-			case (PRE_FLOP):
+			case PRE_FLOP :
 				// collect ante
-				for (int i = 0; i < Table.getListSize(); i++) {	
+				for (int i = 0; i < Table->getListSize(); i++) {
 
 					// Logic Error?
 					// if player kicked, does it skip the next players opportunity to ante?
 					try {
-						setPot(PayIn(Table.getNextNode()->data, Ante));
+						setPot(PayIn(Table->getNextNode()->data, Ante));
 					}
 					catch (InsufficientFunds) {
-						Kick(Table.getCurrPos()->data);
+						Kick(Table->getCurrPos()->data);
 					}
 				}
-				Table.resetList();
+				Table->resetList();
 
-				// deal hands
+				// deal hands - separate from collect ante loop b/c player may not be able to ante
+				for (int i = 0; i < Table->getListSize(); i++) {
+					Table->getNextNode()->data.setHand(PlayCards.Deal(), PlayCards.Deal());
+				}
+				Table->resetList();
 
 				// bet round
+				// go around table
+				// check Player fold?
+				// get player choice - check, raise fold
+				// go around until all even/checked
+				getBets();	//														<-------------------- Working Here
+
 				break;
-			case (FLOP):
+			case FLOP :
 				// play 3 card to table
 				// bet round
 				break;
-			case (TURN):
+			case TURN :
 				// play 1 card to table
 				// bet round
 				break;
-			case (RIVER):
+			case RIVER :
 				// play 1 card to table
 				// bet round
 				break;
-			case (SHOW):
+			case SHOW :
 				// reveal winner
 				// distribute winnings
 				break;
-			default:
-
+			default :
+				break;
 			} // switch
-
+		
 		} // while
 
 		setAnte(); // increases Ante by 5 credits
@@ -98,11 +108,13 @@ int Game::PayIn(Player currPlayer, int betIn)
 
 Game::Game()
 {
+	//Table = new CircleList<Player>();
 	phase = PRE_FLOP;
 	numPlayers = 0;
 	Ante = 5;
 	Pot = 0;
 	totalBet = 0;
+	betsComplete = false;
 }
 
 Game::~Game()
@@ -117,12 +129,29 @@ void Game::Add2Table(int playerNum)
 	Player * newPlayer = new Player();
 	newPlayer->setPlayerNumber(playerNum);
 
-	Table.putNode(*newPlayer);			// is *newPlayer a correct parameter logically for this function?
+	Table->putNode(*newPlayer);			// is *newPlayer a correct parameter logically for this function?
 }
 
 void Game::Kick(Player)
 {
 	// Table.listSize()--;
+}
+
+void Game::getBets()
+{
+	//////////////////////////////////////////////////////////////////////////////////
+	///////////////////            INCOMPLETE FUNCTION              //////////////////
+	//////////////////////////////////////////////////////////////////////////////////
+
+	bool allPlayersChecked = false;
+	CircleList<Player> * startPos = new CircleList<Player>;
+	startPos = Table->getCurrPos();
+	// need pointer to keep track of last player to bet
+	while (!betsComplete) {
+		while (Table->getNextNode()->data.getFold() == FOLD && !allPlayersChecked)
+			Table->getNextNode();
+
+	}
 }
 
 

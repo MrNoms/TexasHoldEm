@@ -18,4 +18,5 @@ public:
 	int getListSize(); // returns totNodes
 	Link<T> * getCurrPos();
 	void resetList();
+	Link<T> * getEnd();
 };
