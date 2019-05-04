@@ -7,17 +7,18 @@ private:
 	Link<T> * end;
 	int totNodes;
 	Link<T> * currPos;
+	bool findNode(T);
 	
 public:
 	CircleList();
 	~CircleList();
-	Link<T> * getNextNode();
 	void putNode(T);
 	void deleteNode(T);
-	void printNodes();
 	int getListSize(); // returns totNodes
-	void setListSize(int);
-	Link<T> * getCurrPos();
 	void resetList();
+	void printNodes();
+
+	Link<T> * getCurrPos();
+	Link<T> * getNextNode();
 	Link<T> * getEnd();
 };

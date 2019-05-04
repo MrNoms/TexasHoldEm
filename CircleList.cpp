@@ -11,31 +11,43 @@ CircleList<T>::CircleList() {
 
 template <class T>
 CircleList<T>::~CircleList() {
-	while (end) deleteNode(end->data);
+	while (totNodes) {
+		Link<T> * trash = end;
+		if (end) end = end->next;
+		delete trash;
+		trash = nullptr;
+		totNodes--;
+	}
 }
 
 template <class T>
 Link<T> * CircleList<T>::getNextNode() {
-	if (!currPos)
-		currPos = end;
-	else
-		currPos = currPos->next;
+	if (!currPos) currPos = end;
+	else currPos = currPos->next;
 	return currPos;
 }
 
 template <class T>
 void CircleList<T>::putNode(T newData) {
 	Link<T> * newNode = new Link<T>;
+	if (!end) {
+		end = newNode;
+		end->next = newNode;
+	}
 	newNode->data = newData;
-	newNode->next = end;
+	newNode->next = end->next;
+	end->next = newNode;
 	end = newNode;
 	totNodes++;
 }
 
 template <class T>
 void CircleList<T>::printNodes() {
-	for (Link<T> * j = end; j; j = j->next)
-		cout << j->data << ' ';
+	Link<T> * j = end;
+	do {
+		cout << j->next->data << ' ';
+		j = j->next;
+	} while (j != end);
 	cout << endl;
 }
 
@@ -43,12 +55,6 @@ template<class T>
 int CircleList<T>::getListSize()
 {
 	return totNodes;
-}
-
-template<class T>
-void CircleList<T>::setListSize(int num)
-{
-	totNodes += num;
 }
 
 template<class T>
@@ -69,23 +75,26 @@ Link<T>* CircleList<T>::getEnd()
 	return end;
 }
 
+template<class T>
+bool CircleList<T>::findNode(T key) {
+	if (currPos->next->data == key) return true;
+	else if (currPos->next == end) {
+		return false;
+	}
+	else {
+		currPos = currPos->next;
+		return this->findNode(key);
+	}
+}
+
 template <class T>
 void CircleList<T>::deleteNode(T trashData) {
-	Link<T> * i = end;
-	while (i && i->data == trashData) {
-		end = end->next;
-		delete i;
+	currPos = end;
+	if (this->findNode(trashData)) {
+		Link<T> * trash = currPos->next;
+		currPos->next = currPos->next->next;
+		if (currPos->next == end) end = currPos;
+		delete trash;
 		totNodes--;
-		i = end;
-	}
-
-	while (i && i->next) {
-		if (i->next->data == trashData) {
-			Link<T> * trash = i->next;
-			i->next = i->next->next;
-			delete trash;
-			totNodes--;
-		}
-		else i = i->next;
 	}
 }
