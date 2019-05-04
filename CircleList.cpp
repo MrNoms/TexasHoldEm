@@ -46,6 +46,12 @@ int CircleList<T>::getListSize()
 }
 
 template<class T>
+void CircleList<T>::setListSize(int num)
+{
+	totNodes += num;
+}
+
+template<class T>
 Link<T> * CircleList<T>::getCurrPos()
 {
 	return currPos;

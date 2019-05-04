@@ -27,7 +27,7 @@ public:
 	void subWallet(int);
 	void setHand(Card, Card);
 	void setPlayerBet();		// get user input for total bet
-	void setPlayerChoice();
+	void setPlayerChoice();		// get user input for: CHECK, RAISE, FOLD
 
 	// getters
 	int getHandRank(Card *); // takes commCards[] from game.h, and player.hand[], and calculates player.handRank
@@ -35,5 +35,6 @@ public:
 	bool getFold();
 	int getWallet();
 	int getPlayerBet();
+	void displayHand();
 };
 

@@ -28,6 +28,11 @@ void Player::setFold(bool fold)
 	this->fold = fold;
 }
 
+void Player::addWallet(int funds)
+{
+	wallet += funds;
+}
+
 void Player::subWallet(int withdraw)
 {
 	wallet -= withdraw;

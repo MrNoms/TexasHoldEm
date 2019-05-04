@@ -16,6 +16,7 @@ public:
 	void deleteNode(T);
 	void printNodes();
 	int getListSize(); // returns totNodes
+	void setListSize(int);
 	Link<T> * getCurrPos();
 	void resetList();
 	Link<T> * getEnd();
