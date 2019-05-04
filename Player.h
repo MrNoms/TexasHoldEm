@@ -26,11 +26,14 @@ public:
 	void addWallet(int);
 	void subWallet(int);
 	void setHand(Card, Card);
+	void setPlayerBet();		// get user input for total bet
+	void setPlayerChoice();
 
 	// getters
 	int getHandRank(Card *); // takes commCards[] from game.h, and player.hand[], and calculates player.handRank
-	int getPlayerChoice(); // returns enum check, raise, fold
+	int getPlayerChoice(); // returns enum check, raise, fold --- asks user
 	bool getFold();
 	int getWallet();
+	int getPlayerBet();
 };
 

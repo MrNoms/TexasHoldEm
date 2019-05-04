@@ -63,7 +63,7 @@ void Game::Play()
 				// check Player fold?
 				// get player choice - check, raise fold
 				// go around until all even/checked
-				getBets();	//														<-------------------- Working Here
+				getBets();
 
 				break;
 			case FLOP :
@@ -139,19 +139,50 @@ void Game::Kick(Player)
 
 void Game::getBets()
 {
-	//////////////////////////////////////////////////////////////////////////////////
-	///////////////////            INCOMPLETE FUNCTION              //////////////////
-	//////////////////////////////////////////////////////////////////////////////////
+	Table->resetList();
+	bool totalBetChange = false;
 
-	bool allPlayersChecked = false;
-	CircleList<Player> * startPos = new CircleList<Player>;
-	startPos = Table->getCurrPos();
-	// need pointer to keep track of last player to bet
-	while (!betsComplete) {
-		while (Table->getNextNode()->data.getFold() == FOLD && !allPlayersChecked)
+	// while (!betsComplete) { 
+	// for loop of Table.length, recursive whenever someone folds?
+	for (int i = 0; i < Table->getListSize(); i++) {
+		
+		// if next player elected to FOLD, skip
+		if (Table->getCurrPos()->next->data.getPlayerChoice != FOLD) {
+
+			Table->getNextNode()->data.setPlayerChoice();
+
+			switch (Table->getCurrPos()->data.getPlayerChoice()) {
+			case CHECK:
+				// if all check cont
+				if (Table->getCurrPos()->data.getPlayerBet() == totalBet)
+					break;
+				else
+					// ...Player must meet totalBet or fold
+					do {
+						cout << "Must meet current bet, or fold!" << endl;
+						// display how much more must be bet
+						Table->getCurrPos()->data.setPlayerChoice();
+					} while (Table->getCurrPos()->data.getPlayerChoice() == CHECK);
+			case RAISE:
+				totalBetChange = true;
+				Table->getCurrPos()->data.setPlayerBet();
+				setPot(PayIn(Table->getCurrPos()->data, Table->getCurrPos()->data.getPlayerBet()));
+				totalBet += Table->getCurrPos()->data.getPlayerBet();
+				break;
+			case FOLD:
+				Table->getCurrPos()->data.setFold(true);
+				break;
+			default:
+				return;
+			}
+		}
+		else
 			Table->getNextNode();
 
 	}
+
+	if (totalBetChange) // all playerc met totalBet
+		getBets();		// traverse list again, skip any players who have folded
 }
 
 
