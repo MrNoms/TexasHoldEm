@@ -1,3 +1,4 @@
 # Visual Studios files
 *.sln
 *.vcxproj*
+*.vs/
