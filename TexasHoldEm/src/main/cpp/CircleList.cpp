@@ -1,100 +1,73 @@
-#include <iostream>
 #include "CircleList.h"
 using namespace std;
 
 template <class T>
 CircleList<T>::CircleList() {
 	end = nullptr;
-	totNodes = 0;
-	currPos = nullptr;
 }
 
 template <class T>
 CircleList<T>::~CircleList() {
-	while (totNodes) {
-		Link<T> * trash = end;
-		if (end) end = end->next;
+	SingleLink<T>* trash;
+	while (end != nullptr) {
+		trash = end;
+		end = end->next;
 		delete trash;
-		trash = nullptr;
-		totNodes--;
 	}
-}
-
-template <class T>
-Link<T> * CircleList<T>::getNextNode() {
-	if (!currPos) currPos = end;
-	else currPos = currPos->next;
-	return currPos;
 }
 
 template <class T>
 void CircleList<T>::putNode(T newData) {
-	Link<T> * newNode = new Link<T>;
-	if (!end) {
+	SingleLink<T> * newNode = new SingleLink<T>(newData);
+	if (end == nullptr) {
 		end = newNode;
 		end->next = newNode;
 	}
-	newNode->data = newData;
-	newNode->next = end->next;
-	end->next = newNode;
-	end = newNode;
-	totNodes++;
-}
-
-template <class T>
-void CircleList<T>::printNodes() {
-	Link<T> * j = end;
-	do {
-		cout << j->next->data << ' ';
-		j = j->next;
-	} while (j != end);
-	cout << endl;
-}
-
-template<class T>
-int CircleList<T>::getListSize()
-{
-	return totNodes;
-}
-
-template<class T>
-Link<T> * CircleList<T>::getCurrPos()
-{
-	return currPos;
-}
-
-template<class T>
-void CircleList<T>::resetList()
-{
-	currPos = NULL;
-}
-
-template<class T>
-Link<T>* CircleList<T>::getEnd()
-{
-	return end;
-}
-
-template<class T>
-bool CircleList<T>::findNode(T key) {
-	if (currPos->next->data == key) return true;
-	else if (currPos->next == end) {
-		return false;
-	}
 	else {
-		currPos = currPos->next;
-		return this->findNode(key);
+		newNode->next = end->next;
+		end->next = newNode;
+		end = newNode;
 	}
 }
 
 template <class T>
 void CircleList<T>::deleteNode(T trashData) {
-	currPos = end;
-	if (this->findNode(trashData)) {
-		Link<T> * trash = currPos->next;
-		currPos->next = currPos->next->next;
-		if (currPos->next == end) end = currPos;
-		delete trash;
-		totNodes--;
+	SingleLink<T>* connect;
+	if ((connect = findNode(trashData)) != NULL) {
+		connect->next = connect->next->next;
+		delete connect->next;
+		if (end == nullptr) end = connect;
 	}
+}
+
+template<class T>
+int CircleList<T>::size() {
+	SingleLink<T>* it = end;
+	int size = 0;
+	do {
+		size++;
+		it = it->next;
+	} while (it != end);
+
+	return size;
+}
+
+template <class T>
+std::string CircleList<T>::to_string() {
+	std::string str = new string();
+	SingleLink<T>* j = end->next;
+	do {
+		str >> j->to_string();
+	} while (j != end->next);
+	return str;
+}
+
+template<class T>
+SingleLink<T>* CircleList<T>::findNode(T key) {
+	SingleLink<T>* i = end;
+	do {
+		if (i->data == key) return i;
+	} while (i != end);
+
+	return nullptr;
 }

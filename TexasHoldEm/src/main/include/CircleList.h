@@ -1,24 +1,21 @@
 #pragma once
-#include "Node_1-link.h"
+#include <string>
+#include "SingleLink.h"
 
 template <class T>
 class CircleList {
 private:
-	Link<T> * end;
-	int totNodes;
-	Link<T> * currPos;
-	bool findNode(T);
+	SingleLink<T> * end;
+
+	SingleLink<T>* findNode(T);
 	
 public:
 	CircleList();
 	~CircleList();
+
+	SingleLink<T> * begin();
 	void putNode(T);
 	void deleteNode(T);
-	int getListSize(); // returns totNodes
-	void resetList();
-	void printNodes();
-
-	Link<T> * getCurrPos();
-	Link<T> * getNextNode();
-	Link<T> * getEnd();
+	int size();
+	std::string to_string();
 };

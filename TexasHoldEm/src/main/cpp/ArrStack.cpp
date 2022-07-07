@@ -13,6 +13,11 @@ ArrStack<T>::~ArrStack() {
 }
 
 template <class T>
+T* ArrStack<T>::getStack() {
+	return items;
+}
+
+template <class T>
 bool ArrStack<T>::isEmpty() {
 	return top == -1;
 }
@@ -28,6 +33,25 @@ T ArrStack<T>::pop() {
 }
 
 template <class T>
+T ArrStack<T>::peek() {
+	return items[top];
+}
+
+template <class T>
 void ArrStack<T>::add(T newItem) {
 	if (!isFull()) items[++top] = newItem;
+}
+
+template <class T>
+int ArrStack<T>::size() {
+	return top + 1;
+}
+
+template <class T>
+std::string ArrStack<T>::to_string() {
+	std::string out;
+	for (T i : this.items) {
+		out << i.to_string() << "->";
+	}
+	return out;
 }
