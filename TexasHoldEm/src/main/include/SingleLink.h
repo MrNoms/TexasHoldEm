@@ -1,17 +1,11 @@
 #pragma once
-#include <string>
 
 template <class T>
 struct SingleLink {
 	T data;
 	SingleLink * next;
 
-	SingleLink<T>(T content) {
-		data = content;
-		next = nullptr;
-	}
+	SingleLink<T>(T);
 
-	std::string to_string() {
-		return "{ " + data.to_string() + " }->";
-	}
+	std::string ToString();
 };
