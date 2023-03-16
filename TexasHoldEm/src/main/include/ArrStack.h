@@ -4,16 +4,13 @@
 template <class T>
 class ArrStack {
 private:
-	T * items;
+	T* items;
 	int capacity;
 	int top;
 
-protected:
-	T* getStack();
-
 public:
-	ArrStack(int);
-	~ArrStack();
+	ArrStack<T>(int);
+	~ArrStack<T>();
 
 	bool isEmpty();
 	bool isFull();
@@ -21,5 +18,5 @@ public:
 	T peek();
 	void add(T);
 	int size();
-	std::string to_string();
+	std::string toString();
 };
