@@ -11,7 +11,7 @@ SingleLink<T>::SingleLink(T content) {
 }
 
 template <class T>
-string SingleLink<T>::ToString() {
+string SingleLink<T>::toString() {
 	ostringstream strm;
 	strm << "{ " << this->data << " }->";
 	return strm.str();

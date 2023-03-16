@@ -27,7 +27,7 @@ namespace SingleLinkTest
 		}
 
 		TEST_METHOD(Display) {
-			Assert::AreEqual(SingleLink<double>(2.5).ToString(), std::string("{ 2.5 }->"));
+			Assert::AreEqual(SingleLink<double>(2.5).toString(), std::string("{ 2.5 }->"));
 		}
 	};
 }

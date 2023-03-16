@@ -7,5 +7,5 @@ struct SingleLink {
 
 	SingleLink<T>(T);
 
-	std::string ToString();
+	std::string toString();
 };
