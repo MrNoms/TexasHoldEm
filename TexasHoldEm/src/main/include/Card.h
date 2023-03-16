@@ -1,61 +1,52 @@
 #pragma once
 #include <string>
-using namespace std;
-
-	enum Suit
-	{NONE, DIAMOND, CLUB, HEART, SPADE};
-	enum Number
-	{ZERO, TWO, THREE, FOUR, FIVE, SIX,
-		SEVEN, EIGHT, NINE, TEN, JACK,
-		QUEEN, KING, ACE};
 
 struct Card {
-	Suit thisSuit;
-	Number thisNum;
+
+	enum class Suit {DIAMOND, CLUB, HEART, SPADE};
+
+	enum class Number {ACE, TWO, THREE, FOUR, FIVE, SIX,
+		SEVEN, EIGHT, NINE, TEN, JACK,
+		QUEEN, KING};
+
+	Suit cardSuit;
+	Number cardNum;
 
 	Card() {
-		thisSuit = NONE;
-		thisNum = ZERO;
+		*this = Card(Number::ACE, Suit::SPADE);
 	}
 
-	Card(Suit s, Number n) {
-		thisSuit = s;
-		thisNum = n;
+	Card(Number n, Suit s) {
+		cardSuit = s;
+		cardNum = n;
 	}
 
-	string showSuit() {
-		switch (thisSuit) {
-		case DIAMOND: return "Diamond";
-			break;
-		case CLUB: return "Club";
-			break;
-		case HEART: return "Heart";
-			break;
-		case SPADE: return "Spade";
-			break;
-		default: return "None";
+	std::string showSuit() {
+		switch (cardSuit) {
+		case Suit::DIAMOND: return "Diamond";
+		case Suit::CLUB: return "Club";
+		case Suit::HEART: return "Heart";
+		case Suit::SPADE: return "Spade";
+		default: return "NONE";
 		}
 	}
 
-	string showNum() {
-		char num = '0';
-		string strSuit = " ";
-		if (thisNum && thisNum < TEN) {
-			num += thisNum + 1;
-			return strSuit + num;
+	std::string showNum() {
+		std::string num;
+		if (cardNum > Number::ACE && cardNum < Number::JACK) {
+			num = (char)cardNum + '0';
+			return num;
 		}
-		switch (thisNum) {
-		case TEN: return "10";
-			break;
-		case JACK: return " J";
-			break;
-		case QUEEN: return " Q";
-			break;
-		case KING: return " K";
-			break;
-		case ACE: return " A";
-			break;
-		default: return "00";
+		else switch (cardNum) {
+		case Number::JACK: return "J";
+		case Number::QUEEN: return "Q";
+		case Number::KING: return "K";
+		case Number::ACE: return "A";
+		default: return "0";
 		}
+	}
+
+	std::string to_string() {
+		return showNum() + " " + showSuit();
 	}
 };
