@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "..\cpp\SingleLink.cpp"
+#include "SingleLink.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
