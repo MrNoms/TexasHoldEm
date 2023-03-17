@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <sstream>
 using namespace std;
 
 enum class Suit {DIAMOND, CLUB, HEART, SPADE};
@@ -28,4 +29,6 @@ struct Card {
 	friend bool operator > (const Card&, const Card&);
 
 	friend bool operator < (const Card&, const Card&);
+
+	friend ostream& operator << (ostream&, Card&);
 };

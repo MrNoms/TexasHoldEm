@@ -63,3 +63,8 @@ bool operator < (const Card& lhs, const Card& rhs) {
 	return lhs.cardNum < rhs.cardNum ||
 		(lhs.cardNum == rhs.cardNum && lhs.cardSuit < rhs.cardSuit);
 }
+
+ostream& operator << (ostream& lhs, Card& rhs) {
+	lhs << rhs.toString();
+	return lhs;
+}
