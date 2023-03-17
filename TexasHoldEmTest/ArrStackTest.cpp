@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "..\cpp\ArrStack.cpp"
+#include "ArrStack.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
