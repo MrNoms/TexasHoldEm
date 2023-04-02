@@ -43,15 +43,14 @@ public:
 	bool add(T newItem) {
 		try {
 			SingleLink<T>* newLink = new SingleLink<T>(newItem);
-			newLink->next = top;
-			top = newLink;
-			size++;
-			return true;
 		}
 		catch (std::runtime_error) {
-			top->next = nullptr;
 			return false;
 		}
+		newLink->next = top;
+		top = newLink;
+		size++;
+		return true;
 	}
 	int getSize() {
 		return size;
