@@ -41,17 +41,17 @@ public:
 		return top->data;
 	}
 	bool add(T newItem) {
+		SingleLink<T>* newLink;
 		try {
-			SingleLink<T>* newLink = new SingleLink<T>(newItem);
-			newLink->next = top;
-			top = newLink;
-			size++;
-			return true;
+			newLink = new SingleLink<T>(newItem);
 		}
 		catch (std::runtime_error) {
-			top->next = nullptr;
 			return false;
 		}
+		newLink->next = top;
+		top = newLink;
+		size++;
+		return true;
 	}
 	int getSize() {
 		return size;
