@@ -41,8 +41,9 @@ public:
 		return top->data;
 	}
 	bool add(T newItem) {
+		SingleLink<T>* newLink;
 		try {
-			SingleLink<T>* newLink = new SingleLink<T>(newItem);
+			newLink = new SingleLink<T>(newItem);
 		}
 		catch (std::runtime_error) {
 			return false;
