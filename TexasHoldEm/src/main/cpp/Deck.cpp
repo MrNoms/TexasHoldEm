@@ -1,30 +1,42 @@
+#include <random>
+
 #include "Deck.h"
 
-Deck::~Deck() {
-	delete[] getStack();
+void Deck::getDeck() {
+	for (int i = 0; i < 52; i++) {
+		this->add(Card(Number(i % 13), Suit(i / 13)));
+	}
 }
 
-Deck* Deck::getDeck() {
-	Card::Suit s = Card::Suit::DIAMOND;
-	while (s <= Card::Suit::SPADE) {
-		Card::Number n = Card::Number::ACE;
-		while (n <= Card::Number::KING) {
-			add(Card(n,s));
-			n = Card::Number((int)n + 1);
-		}
-		s = Card::Suit((int)s + 1);
+void Deck::shuffle() {
+	//set up random numbers
+	random_device rd;
+	mt19937 eng(rd());
+	uniform_int_distribution<> distro(-9, 9);
+	
+	//Cut the deck at 26 +- random, result is two smaller decks
+	int cut = distro(eng);
+	Deck* halves = new Deck[2];
+
+	transferTo(halves, 26 + cut);
+	transferTo(halves + 1, 26 - cut);
+
+	//Put few cards from one stack back in original
+	distro.param(uniform_int<int>::param_type(1, 4));
+
+	int deck = 0;
+	while (!(halves[0].isEmpty() && halves[1].isEmpty())) {
+		halves[deck].transferTo(this, distro(eng));
+		deck = (deck + 1) % 2;
+		//Switch off randomly
 	}
-	return this;
+
+	delete[] halves;
 }
 
-void Deck::ShuffleInto(Deck & other) {
-	Deck waiting;
-
-	int skip;
-	while (!this->isEmpty()) {
-		other.add(this->pop());
-		skip = (int)other.peek().cardNum + 1;
-		for (int i = 0; i < skip; i++) waiting.add(this->pop());
+void Deck::transferTo(Deck* d, int cards) {
+	try {
+		for (int i = 0; i < cards; i++) { d->add(this->pop()); }
 	}
-	if(!other.isFull()) waiting.ShuffleInto(other);
+	catch (std::logic_error) {}
 }

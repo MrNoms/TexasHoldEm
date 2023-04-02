@@ -3,11 +3,13 @@
 #include <sstream>
 using namespace std;
 
-enum class Suit {DIAMOND, CLUB, HEART, SPADE};
+enum class Suit {DIAMOND, CLUB, HEART, SPADE,
+	FIRST = DIAMOND, LAST = SPADE};
 
 enum class Number {TWO, THREE, FOUR, FIVE, SIX,
 	SEVEN, EIGHT, NINE, TEN, JACK,
-	QUEEN, KING, ACE};
+	QUEEN, KING, ACE,
+	FIRST = TWO, LAST = ACE};
 
 struct Card {
 	Suit cardSuit;

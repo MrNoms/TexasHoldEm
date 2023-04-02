@@ -1,15 +1,14 @@
 #pragma once
-#include "ArrStack.cpp"
 #include "Card.h"
+#include "Stack.h"
 
-class Deck : public ArrStack<Card> {
+class Deck : public Stack<Card> {
 private:
-	const int MAX = 52;
+	void transferTo(Deck*, int);
 
 public:
-	Deck() : ArrStack<Card>(MAX) {}
-	~Deck();
+	using Stack<Card>::Stack;
 
-	Deck* getDeck();
-	void ShuffleInto(Deck &);
+	void getDeck();
+	void shuffle();
 };
