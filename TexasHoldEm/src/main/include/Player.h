@@ -1,27 +1,20 @@
 #pragma once
-#include "Card.h"
+#include "Deck.h"
 #include <string>
 
 enum class PlayerChoice { CHECK, RAISE, FOLD }; 
 
 class Player {
 private:
-	int const CARD_LIMIT = 2;
-	int const BUY_IN = 1000;
-
-	Card* hand; // two cards in players hand
+	Deck hand; // two cards in players hand
 	int wallet; // total $ in wallet
 
 public:
-	Player();
-	~Player();
-
-	void updateWallet(int);
-	void setHand(Card, Card);
+	Player(int);
 
 	int getWallet();
-	Card* getHand();
+	Deck getHand();
 
-	std::string displayHand();
+	void updateWallet(int);
 };
 
