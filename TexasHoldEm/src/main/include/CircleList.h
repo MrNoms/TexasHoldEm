@@ -11,8 +11,8 @@ private:
 	SingleLink<T>* findNodeBefore(T key) {
 		SingleLink<T>* i = end;
 		do {
-			if (i->next->data == key) return i;
-			else i = i->next;
+			if (i && i->next->data == key) return i;
+			else if(i) i = i->next;
 		} while (i != end);
 
 		return nullptr;
@@ -25,15 +25,16 @@ public:
 	}
 	~CircleList() {
 		SingleLink<T>* trash;
-		while (end != nullptr) {
+		while (size > 0) {
 			trash = end;
 			end = end->next;
 			delete trash;
+			size--;
 		}
 	}
 
 	SingleLink<T>* begin() {
-		return end->next;
+		return end == nullptr ? nullptr : end->next;
 	}
 	bool putNode(T newData) {
 		SingleLink<T>* newNode;
@@ -52,6 +53,7 @@ public:
 			end->next = newNode;
 			end = newNode;
 		}
+		size++;
 		return true;
 	}
 	bool deleteNode(T trashData) {
@@ -59,8 +61,10 @@ public:
 		if ((connect = findNodeBefore(trashData)) != nullptr) {
 			SingleLink<T>* trash = connect->next;
 			connect->next = trash->next;
+			if (trash == end) end = connect;
 			delete trash;
-			if (end == nullptr) end = connect;
+			size--;
+			if (size == 0) end = nullptr;
 			return true;
 		}
 
