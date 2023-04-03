@@ -8,12 +8,19 @@ class Player {
 private:
 	Deck hand; // two cards in players hand
 	int wallet; // total $ in wallet
+	std::string name;
+
+	PlayerChoice decision;
 
 public:
 	Player(int);
 
 	int getWallet();
 	Deck getHand();
+	std::string getName();
+
+	void setDecision(PlayerChoice);
+	PlayerChoice getDecision();
 
 	void updateWallet(int);
 };
