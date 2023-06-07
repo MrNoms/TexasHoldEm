@@ -6,7 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: ls -a
-      - run: ls -a TexasHoldEm
-      - run: ls -a TexasHoldEmTest
+      - run: tree -a
       
