@@ -2,8 +2,8 @@
 
 int main(int argc, char* argv[]) {
 	SingleLink<Card> cl = SingleLink<Card>(Card());
-	cl.next = new SingleLink<Card>(Card(Card::Number::KING, Card::Suit::DIAMOND));
-	cout << cl.to_string() << cl.next->to_string() << endl;
+	cl.next = new SingleLink<Card>(Card(Number::KING, Suit::DIAMOND));
+	cout << cl.toString() << cl.next->toString() << endl;
 
 	return 0;
 }

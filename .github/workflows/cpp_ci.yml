@@ -1,0 +1,14 @@
+name: C++ CI
+run-name: Build and Run Unit Tests
+
+on:
+  push:
+    branches:
+      - rayshaun
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: g++ TexasHoldEm/src/main/cpp/* -I TexasHoldEm/src/main/include
