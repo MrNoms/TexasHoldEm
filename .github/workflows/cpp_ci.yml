@@ -11,7 +11,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - run: g++ TexasHoldEm/src/main/cpp/* -I TexasHoldEm/src/main/include
-      - run: tree -a
+      - run: g++ TexasHoldEm\src\main\cpp\* -I TexasHoldEm\src\main\include
+      - run: tree /F /A
       - uses: darenm/Setup-VSTest@v1
-      - run: vstest.console TexasHoldEm/Debug/TexasHoldEmTest.dll
+      - run: vstest.console TexasHoldEm\x64\Debug\TexasHoldEmTest.dll
