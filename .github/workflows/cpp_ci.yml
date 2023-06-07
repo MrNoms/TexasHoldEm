@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: microsoft/setup-msbuild@v1.0.0
+      - uses: microsoft/setup-msbuild@v1
       - run: msbuild .\TexasHoldEm\TexasHoldEm.sln
       - run: tree /F /A
 
-      - uses: darenm/Setup-VSTest@v1
+      - uses: microsoft/vstest-action@v1.0.0
       - run: vstest.console TexasHoldEm\x64\Debug\TexasHoldEmTest.dll
