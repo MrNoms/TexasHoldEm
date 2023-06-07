@@ -14,7 +14,7 @@ jobs:
       - run: tree /F /A
 
       - uses: microsoft/setup-msbuild@v1
-      - run: msbuild .\TexasHoldEm\TexasHoldEm.sln
+      - run: msbuild TexasHoldEm\TexasHoldEm.sln
       - run: tree /F /A
 
       - uses: microsoft/vstest-action@v1.0.0
