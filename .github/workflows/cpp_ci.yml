@@ -7,8 +7,11 @@ on:
       - rayshaun
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: g++ TexasHoldEm/src/main/cpp/* -I TexasHoldEm/src/main/include
+      - run: tree -a
+      - uses: darenm/Setup-VSTest@v1
+      - run: vstest.console TexasHoldEm/Debug/TexasHoldEmTest.dll
