@@ -2,11 +2,10 @@
 #include <sstream>
 
 
-Player::Player(int buyIn) {
-	wallet = buyIn;
-
+Player::Player() {
 	hand = Deck();
-	name = std::to_string((int)this);
+	wallet = 0;
+	name = std::to_string((unsigned long long)(void**)this);
 }
 
 void Player::updateWallet(int funds)

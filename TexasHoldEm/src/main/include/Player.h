@@ -13,7 +13,7 @@ private:
 	PlayerChoice decision;
 
 public:
-	Player(int);
+	Player();
 
 	int getWallet();
 	Deck getHand();

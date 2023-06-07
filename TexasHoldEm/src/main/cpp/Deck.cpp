@@ -2,6 +2,8 @@
 
 #include "Deck.h"
 
+using namespace std;
+
 void Deck::getDeck() {
 	for (int i = 0; i < 52; i++) {
 		this->add(Card(Number(i % 13), Suit(i / 13)));
@@ -22,7 +24,7 @@ void Deck::shuffle() {
 	transferTo(halves + 1, 26 - cut);
 
 	//Put few cards from one stack back in original
-	distro.param(uniform_int<int>::param_type(1, 4));
+	distro.param(uniform_int_distribution<>::param_type(1, 4));
 
 	int deck = 0;
 	while (!(halves[0].isEmpty() && halves[1].isEmpty())) {
