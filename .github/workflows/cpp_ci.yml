@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: g++ -o TexasHoldEm TexasHoldEm/src/main/cpp/* -I TexasHoldEm/src/main/include
+      - run: g++ TexasHoldEm/src/main/cpp/* -I TexasHoldEm/src/main/include
