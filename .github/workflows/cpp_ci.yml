@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.5.2
 
       - uses: microsoft/setup-msbuild@v1
       - run: msbuild .\TexasHoldEm\TexasHoldEm.sln
