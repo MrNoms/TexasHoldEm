@@ -3,21 +3,34 @@ run-name: Build and Run Unit Tests
 
 on:
   push:
-    branches:
-      - rayshaun
+    branches-ignore:
+      - master
 
 jobs:
   build-and-test:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3.5.2
+      - uses: microsoft/setup-msbuild@v1
 
       # Only run this pipeline if commit has changes in this file or in files that fit *.cpp or *.h, otherwise abort
 
-      - uses: microsoft/setup-msbuild@v1
-      - run: msbuild -maxCpuCount TexasHoldEm\TexasHoldEm.sln
+      - name: Get number of changed project files
+        run: git diff --name-only ${{ github.ref_name }}..master | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /c /v "" > num~
 
-      - uses: microsoft/vstest-action@v1.0.0
+      - name: Save the number to system
+        run: set \p FILES= < num~
+
+      - name: Save that number to Github context
+        run: echo "files=%FILES%" >> "$GITHUB_ENV"
+
+      # if that number is > 0, continue to build, otherwise end workflow
+
+      - if: env.files > 0
+        run: msbuild -maxCpuCount TexasHoldEm\TexasHoldEm.sln
+
+      - if: env.files > 0
+        uses: microsoft/vstest-action@v1.0.0
         with:
           testAssembly: TexasHoldEmTest.dll
           searchFolder: .\TexasHoldEm\x64\Debug\
