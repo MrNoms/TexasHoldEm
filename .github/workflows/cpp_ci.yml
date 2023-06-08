@@ -26,6 +26,8 @@ jobs:
       - name: Save the number to system
         run: set \a FILES= < num~
 
+      - run: echo %FILES%
+
       - name: Save that number to Github context
         run: echo "files=%FILES%" >> "$GITHUB_ENV"
 
