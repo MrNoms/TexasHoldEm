@@ -1,17 +1,17 @@
 name: C++ CI
 run-name: Build and Run Unit Tests
-
 on:
   push:
     branches-ignore:
       - master
 
+defaults:
+  run:
+    shell: cmd
+
 jobs:
   build-and-test:
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: cmd
     steps:
       - uses: actions/checkout@v3.5.2
       - uses: microsoft/setup-msbuild@v1
