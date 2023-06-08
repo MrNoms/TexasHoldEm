@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../cpp/Deck.cpp"
+#include "..\include\Deck.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
