@@ -24,7 +24,7 @@ jobs:
         run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /c /v "" > num~
 
       - name: Save the number to system
-        run: set \p FILES= < num~
+        run: set \a FILES= < num~
 
       - name: Save that number to Github context
         run: echo "files=%FILES%" >> "$GITHUB_ENV"
