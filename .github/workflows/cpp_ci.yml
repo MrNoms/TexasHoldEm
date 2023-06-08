@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v3.5.2
 
       - uses: microsoft/setup-msbuild@v1
-      - run: msbuild TexasHoldEm\TexasHoldEm.sln
+      - run: msbuild -maxCpuCount TexasHoldEm\TexasHoldEm.sln
 
       - uses: microsoft/vstest-action@v1.0.0
         with:
           testAssembly: TexasHoldEmTest.dll
-          searchFolder: .\TexasHoldem\x64\Debug\
+          searchFolder: .\TexasHoldEm\x64\Debug\
           runInParallel: true
