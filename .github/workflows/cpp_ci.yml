@@ -14,6 +14,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3.5.2
+        with:
+          fetch-depth: 0
       - uses: microsoft/setup-msbuild@v1
 
       # Only run this pipeline if commit has changes in this file or in files that fit *.cpp or *.h, otherwise abort
