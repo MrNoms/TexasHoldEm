@@ -11,15 +11,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3.5.2
-      - run: tree /F /A
 
       - uses: microsoft/setup-msbuild@v1
       - run: msbuild TexasHoldEm\TexasHoldEm.sln
-      - run: tree /F /A
 
       - uses: microsoft/vstest-action@v1.0.0
         with:
-          testAssembly: .\TexasHoldEm\x64\Debug\TexasHoldEmTest.dll
-          searchFolder: .\TexasHoldemTest\
-          testFilterCriteria: '*.cpp'
+          testAssembly: TexasHoldEmTest.dll
+          searchFolder: .\TexasHoldem\x64\Debug\
           runInParallel: true
