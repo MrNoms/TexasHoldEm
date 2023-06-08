@@ -9,4 +9,4 @@ jobs:
         with:
           fetch-depth: 0
       - run: git branch -a
-      - run: git diff ${{ github.ref_name }}..rayshaun
+      - run: git diff ${{ github.ref_name }}..remotes/origin/rayshaun
