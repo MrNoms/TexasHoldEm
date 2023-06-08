@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "..\include\Player.h"
+#include "Player.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

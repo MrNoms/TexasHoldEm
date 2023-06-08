@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "..\include\Stack.h"
+#include "Stack.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

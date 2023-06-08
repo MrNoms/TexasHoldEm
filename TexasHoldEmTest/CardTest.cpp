@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "..\include\Card.h"
+#include "Card.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
