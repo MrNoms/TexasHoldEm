@@ -9,6 +9,4 @@ jobs:
         with:
           fetch-depth: 2
       - run: git branch -a
-      - run: git checkout -b rayshaun
-      - run: git pull origin rayshaun
       - run: git diff ${{ github.ref_name }}..rayshaun
