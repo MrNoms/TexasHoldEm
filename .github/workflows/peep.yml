@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: git diff --name-only remotes/origin/rayshaun..remotes/origin/master
+      - run: git diff ${{ github.ref_name }}
