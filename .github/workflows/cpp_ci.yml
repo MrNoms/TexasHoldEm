@@ -18,4 +18,8 @@ jobs:
       - run: tree /F /A
 
       - uses: microsoft/vstest-action@v1.0.0
-      - run: vstest.console TexasHoldEm\x64\Debug\TexasHoldEmTest.dll
+        with:
+          testAssembly: .\TexasHoldEm\x64\Debug\TexasHoldEmTest.dll
+          searchFolder: .\TexasHoldemTest\
+          testFilterCriteria: '*.cpp'
+          runInParallel: true
