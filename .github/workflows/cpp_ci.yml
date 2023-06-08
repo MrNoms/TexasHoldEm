@@ -19,7 +19,7 @@ jobs:
       # Only run this pipeline if commit has changes in this file or in files that fit *.cpp or *.h, otherwise abort
 
       - name: Get number of changed project files
-        run: git diff --name-only ${{ github.ref_name }}..origin/master | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /c /v "" > num~
+        run: git diff --name-only ${{ github.ref_name }}..remotes/origin/HEAD | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /c /v "" > num~
 
       - name: Save the number to system
         run: set \p FILES= < num~
