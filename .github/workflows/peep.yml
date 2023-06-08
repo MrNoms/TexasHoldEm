@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
       - run: git branch -a
       - run: git checkout -b rayshaun
       - run: git pull origin rayshaun
