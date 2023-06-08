@@ -22,3 +22,5 @@ jobs:
           testAssembly: TexasHoldEmTest.dll
           searchFolder: .\TexasHoldEm\x64\Debug\
           runInParallel: true
+
+      # Create a pull request for master branch
