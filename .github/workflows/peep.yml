@@ -15,5 +15,7 @@ jobs:
       - run: git diff --name-only ${{ github.ref_name }}..remotes/origin/rayshaun | FIND /c /v "" > num~
       - run: set /p _files= < num~
       - run: set _files
-      - run: echo "files=%_files%" >> "$GITHUB_ENV"
-      - run: echo ${{ env._files }}
+      - run: |
+          echo "files=%_files%" >> "$GITHUB_ENV"
+      - run: |
+          echo ${{ env._files }}
