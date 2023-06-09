@@ -8,6 +8,7 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+      - run: echo on
       - uses: actions/checkout@v3.5.2
         with:
           fetch-depth: 0
