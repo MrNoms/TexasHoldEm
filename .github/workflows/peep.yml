@@ -17,5 +17,5 @@ jobs:
           set _files
           set _files >> "$GITHUB_ENV"
       - run: |
-          echo '${{ toJson(github) }}'
+          echo "${{ toJson(github) }}"
       - run: type ${{ github.env}}
