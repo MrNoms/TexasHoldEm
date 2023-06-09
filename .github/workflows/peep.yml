@@ -13,7 +13,8 @@ jobs:
           fetch-depth: 0
       - run: git branch -a
       - run: git diff --name-only ${{ github.ref_name }}..remotes/origin/rayshaun | FIND /c /v "" > num~
-      - run: set /p _files= < num~
+      - run: |
+          set /p _files= < num~
           set _files
           set _files >> "$GITHUB_ENV"
       - run: echo "${{ github.env }}"
