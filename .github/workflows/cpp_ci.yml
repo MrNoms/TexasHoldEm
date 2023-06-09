@@ -24,11 +24,10 @@ jobs:
         run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj|yml]" | FIND /c /v "" > num~
 
       - name: Save the number to system
-        run: set \p FILES= < num~
+        run: set /p _files= < num~
 
       - name: Save that number to Github context
-        id: save_files
-        run: echo "files=%FILES%" >> "%GITHUB_OUTPUT%"
+        run: echo "files=%_files%" >> "$GITHUB_ENV"
 
       # if that number is > 0, continue to build, otherwise end workflow
 
