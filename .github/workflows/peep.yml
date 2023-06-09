@@ -18,4 +18,4 @@ jobs:
           set _files >> "$GITHUB_ENV"
       - env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo '$GITHUB_CONTEXT'
+        run: echo $GITHUB_CONTEXT
