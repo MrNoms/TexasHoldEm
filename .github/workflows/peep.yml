@@ -1,5 +1,8 @@
 name: Machine Properties
 on: workflow_dispatch
+defaults:
+  run:
+    shell: cmd
 
 jobs:
   build:
