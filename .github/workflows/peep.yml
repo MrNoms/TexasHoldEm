@@ -16,4 +16,4 @@ jobs:
           set /p _files= < num~
           set _files
           set _files >> ${{ github.env }}
-      - run: type ${{ github.env._files }}
+      - run: type ${{ github.env }}
