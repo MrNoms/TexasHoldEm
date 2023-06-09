@@ -21,15 +21,14 @@ jobs:
       # Only run this pipeline if commit has changes in this file or in files that fit *.cpp or *.h, otherwise abort
 
       - name: Get number of changed project files
-        run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /c /v "" > num~
+        run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj|yml]" | FIND /c /v "" > num~
 
       - name: Save the number to system
-        run: set \a FILES= < num~
-
-      - run: type num~
+        run: set \p FILES= < num~
 
       - name: Save that number to Github context
-        run: echo "files=%FILES%" >> "$GITHUB_ENV"
+        id: save_files
+        run: echo "files=%FILES%" >> "%GITHUB_OUTPUT%"
 
       # if that number is > 0, continue to build, otherwise end workflow
 
