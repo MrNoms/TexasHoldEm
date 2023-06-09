@@ -17,4 +17,5 @@ jobs:
           set /p _files= < num~
           set _files
           set _files >> "$GITHUB_ENV"
-      - run: echo "${{ github.env }}"
+      - run: |
+          echo "${{ github.env }}"
