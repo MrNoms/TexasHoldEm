@@ -24,19 +24,16 @@ jobs:
         run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj|yml]" | FIND /c /v "" > num~
 
       - name: Save the number to system
-        run: set /p _files= < num~
-
-      - name: Save that number to Github context
-        run: echo "files=%_files%" >> "$GITHUB_ENV"
-        
-      - run: echo ${{ env.files }}
+        run: |
+          set /p _files= < num~
+          set _files >> ${{ github.env  }}
 
       # if that number is > 0, continue to build, otherwise end workflow
 
-      - if: env.files > 0
+      - if: env._files > 0
         run: msbuild -maxCpuCount TexasHoldEm\TexasHoldEm.sln
 
-      - if: env.files > 0
+      - if: env._files > 0
         uses: microsoft/vstest-action@v1.0.0
         with:
           testAssembly: TexasHoldEmTest.dll
