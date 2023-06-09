@@ -2,7 +2,7 @@ name: Machine Properties
 on: workflow_dispatch
 defaults:
   run:
-    shell: cmd /V:ON
+    shell: cmd /D /E:ON /V:ON /S /C "CALL "{0}""
 
 jobs:
   build:
