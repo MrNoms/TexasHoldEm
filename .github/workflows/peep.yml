@@ -1,9 +1,20 @@
 name: Machine Properties
 on: workflow_dispatch
-
+defaults:
+  run:
+    shell: cmd
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.5.2
+        with:
+          fetch-depth: 0
       - run: git branch -a
+      - run: git diff --name-only ${{ github.ref_name }}..remotes/origin/rayshaun | FIND /c /v "" > num~
+      - run: |
+          set /p _files= < num~
+          set _files
+          set _files >> ${{ github.env }}
+      - run: type ${{ github.env }}
+      - run: echo ${{ env._files }}
