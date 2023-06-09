@@ -16,4 +16,6 @@ jobs:
           set /p _files= < num~
           set _files
           set _files >> "$GITHUB_ENV"
-      - run: echo '${{ toJson(github) }}'
+      - env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo '$GITHUB_CONTEXT'
