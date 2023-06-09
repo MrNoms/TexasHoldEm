@@ -28,6 +28,8 @@ jobs:
 
       - name: Save that number to Github context
         run: echo "files=%_files%" >> "$GITHUB_ENV"
+        
+      - run: echo ${{ env.files }}
 
       # if that number is > 0, continue to build, otherwise end workflow
 
