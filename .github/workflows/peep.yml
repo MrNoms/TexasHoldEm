@@ -8,14 +8,12 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - run: echo on
       - uses: actions/checkout@v3.5.2
         with:
           fetch-depth: 0
       - run: git branch -a
       - run: git diff --name-only ${{ github.ref_name }}..remotes/origin/rayshaun | FIND /c /v "" > num~
       - run: set /p _files= < num~
-      - run: type num~
-      - run: echo %_files%
+      - run: set _files
       - run: echo "files=%_files%" >> "$GITHUB_ENV"
-      - run: echo ${{ env.files }}
+      - run: echo ${{ env._files }}
