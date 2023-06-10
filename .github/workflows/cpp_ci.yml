@@ -19,7 +19,7 @@ jobs:
       - uses: microsoft/setup-msbuild@v1
 
       - name: Get number of changed project files
-        run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /c /v "" > num~
+        run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /C "." > num~
 
       - name: Save the number to system
         run: |
