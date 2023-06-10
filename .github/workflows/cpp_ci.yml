@@ -38,9 +38,9 @@ jobs:
 
       - name: Create pull request to master
         run: |
-          curl --location^
-          --request POST^
-          --header "Accept:application/vnd.github+json"^
-          --header "Authorization:Bearer ${{ github.token }}"^
-          --json '{"head":"${{ github.ref_name }}","base":"remotes/origin/master"}'^
+          curl --location ^
+          --request POST ^
+          --header "Accept:application/vnd.github+json" ^
+          --header "Authorization:Bearer ${{ github.token }}" ^
+          --json '{"head":"${{ github.ref_name }}","base":"remotes/origin/master"}' ^
           --url https://api.github.com/repos/${{ github.repository }}/pulls 
