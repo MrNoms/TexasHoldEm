@@ -18,17 +18,13 @@ jobs:
           fetch-depth: 0
       - uses: microsoft/setup-msbuild@v1
 
-      # Only run this pipeline if commit has changes in this file or in files that fit *.cpp or *.h, otherwise abort
-
       - name: Get number of changed project files
-        run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj|yml]" | FIND /c /v "" > num~
+        run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /c /v "" > num~
 
       - name: Save the number to system
         run: |
           set /p _files= < num~
           set _files >> ${{ github.env  }}
-
-      # if that number is > 0, continue to build, otherwise end workflow
 
       - if: env._files > 0
         run: msbuild -maxCpuCount TexasHoldEm\TexasHoldEm.sln
@@ -40,4 +36,11 @@ jobs:
           searchFolder: .\TexasHoldEm\x64\Debug\
           runInParallel: true
 
-      # Create a pull request for master branch
+      - name: Create pull request to master
+        run: |
+          curl -L ^
+          -X POST ^
+          -H "Accept: application/vnd.github+json" ^
+          -H "Authorization: Bearer ${{ env.token }}"^
+          https://api.github.com/repos/${{ env.repository }}/pulls ^
+          -d '{"head":"${{ github.ref_name }}","base":"remotes/origin/master"}'
