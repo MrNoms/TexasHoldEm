@@ -1,14 +1,47 @@
 name: C++ CI
 run-name: Build and Run Unit Tests
-
 on:
   push:
-    branches:
-      - rayshaun
+    branches-ignore:
+      - master
+
+defaults:
+  run:
+    shell: cmd
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-and-test:
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: g++ TexasHoldEm/src/main/cpp/* -I TexasHoldEm/src/main/include
+      - uses: actions/checkout@v3.5.2
+        with:
+          fetch-depth: 0
+      - uses: microsoft/setup-msbuild@v1
+
+      - name: Get number of changed project files
+        run: git diff --name-only ${{ github.ref_name }}..remotes/origin/master | FINDSTR ".*\.[h|cpp|vcxproj]" | FIND /c /v "" > num~
+
+      - name: Save the number to system
+        run: |
+          set /p _files= < num~
+          set _files >> ${{ github.env  }}
+
+      - if: env._files > 0
+        run: msbuild -maxCpuCount TexasHoldEm\TexasHoldEm.sln
+
+      - if: env._files > 0
+        uses: microsoft/vstest-action@v1.0.0
+        with:
+          testAssembly: TexasHoldEmTest.dll
+          searchFolder: .\TexasHoldEm\x64\Debug\
+          runInParallel: true
+
+      - name: Create pull request to master
+        run: |
+          curl --location ^
+          --request POST ^
+          --header "Accept:application/vnd.github+json" ^
+          --header "Authorization:Bearer ${{ github.token }}" ^
+          --header "X-GitHub-Api-Version:2022-11-28" ^
+          --json "{\"title\":\"${{ github.ref_name }}\",\"head\":\"${{ github.ref_name }}\",\"base\":\"master\"}" ^
+          --url https://api.github.com/repos/${{ github.repository }}/pulls 
