@@ -6,6 +6,7 @@ Player::Player() {
 	hand = Deck();
 	wallet = 0;
 	name = std::to_string((unsigned long long)(void**)this);
+	//commenting source
 }
 
 void Player::updateWallet(int funds)
